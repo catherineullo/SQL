@@ -88,3 +88,7 @@ SELECT name, (intelligence + strength + speed + durability + energy_Projection +
     GROUP BY name
     HAVING total_skill_points > 24
     ORDER BY total_skill_points DESC;
+
+/* Filtering for max and min values*/
+SELECT name, MAX(intelligence) from marvels;
+SELECT name, MIN(durability) from marvels;
