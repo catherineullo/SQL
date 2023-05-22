@@ -1,3 +1,7 @@
+/* Read Me: This file contains a data set of Marvel characters accumulated by Khan Academy. The proceeding SQL coding has been created by me to filter, sort, and average data using the HAVING, CASE, AND/OR statements as well as max, min, & avg functions. */
+
+
+
 /* Marvel Heroes and Villains
  Based on the website http://marvel.wikia.com/Main_Page
  with popularity data from http://observationdeck.io9.com/something-i-found-marvel-character-popularity-poll-cb-1568108064 
