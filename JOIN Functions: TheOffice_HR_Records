@@ -1,0 +1,99 @@
+/*This project utilizes joins to query data based on the tv show 'The Office'. The table information was gathered and created myself based on information available on wikipedia(https://en.wikipedia.org/wiki/The_Office_(American_TV_series) and fandom (https://theoffice.fandom.com/wiki/Main_Page).  */
+
+CREATE TABLE staff (ID INTEGER PRIMARY KEY,
+    fullname TEXT,
+    episode_count INTEGER);
+INSERT INTO staff VALUES (1, "Michael Scott", 184);
+INSERT INTO staff VALUES (2, "Jim Halpert", 204);
+INSERT INTO staff VALUES (3, "Pam Beesly", 204);
+INSERT INTO staff VALUES (4, "Dwight Schrute", 204);
+INSERT INTO staff VALUES (5, "Angela Martin", 204);
+INSERT INTO staff VALUES (6, "Kelly Kapoor", 142);
+INSERT INTO staff VALUES (7, "Karen Filippelli", 32);
+INSERT INTO staff VALUES (8, "Jan Levinson", 98);
+INSERT into staff VALUES (9, "Roy Anderson", 26);
+INSERT into staff VALUES (10, "Ryan Howard", 183);
+INSERT into staff VALUES (11, "Andy Bernard", 178);
+INSERT into staff VALUES (12, "Phyllis Lapin-Vance", 204);
+INSERT into staff VALUES (13, "Bob Vance: Vance Refrigeration", 25);
+INSERT into staff VALUES (14, "Holly Partridge-Scott", 19);
+INSERT into staff VALUES (15, "Gabe Lewis", 47);
+INSERT into staff VALUES (16, "Erin Hannon", 117);
+INSERT into staff VALUES (17, "Oscar Martinez", 203);
+INSERT into staff VALUES (18, "Kevin Malone", 204);
+INSERT into staff VALUES (19, "Toby Flenderson", 201);
+INSERT into staff VALUES (20, "Creed Bratton", 204);
+INSERT into staff VALUES (21, "Stanley Hudson", 204);
+INSERT into staff VALUES (22, "Pete Miller", 21);
+
+CREATE TABLE theofficejob (ID INTEGER PRIMARY KEY,
+    job_status TEXT,
+    dept TEXT);
+INSERT into theofficejob VALUES (1, "Resigned", "Regional Manager");
+INSERT into theofficejob VALUES (2, "Resigned", "Sales");
+INSERT into theofficejob VALUES (3, "Resigned", "Admin");
+INSERT into theofficejob VALUES (4, "Employed", "Regional Manager"); 
+INSERT into theofficejob VALUES (5, "Employed", "Accounting");
+INSERT into theofficejob VALUES (6, "Resigned", "Customer Service");
+INSERT into theofficejob VALUES (7, "Employed", "Regional Manager");
+INSERT into theofficejob VALUES (8, "Terminated", "Corporate");
+INSERT into theofficejob VALUES (9, "Terminated", "Warehouse");
+INSERT into theofficejob VALUES (10, "Resigned", "Temp");
+INSERT into theofficejob VALUES (11, "Terminated", "Regional Manager");
+INSERT into theofficejob VALUES (12, "Employed", "Sales");
+INSERT into theofficejob VALUES (14, "Resigned", "HR");
+INSERT into theofficejob VALUES (15, "Terminated", "Admin");
+INSERT into theofficejob VALUES (16, "Employed", "Admin");
+INSERT into theofficejob VALUES (17, "Employed", "Accounting");
+INSERT into theofficejob VALUES (18, "Terminated", "Accounting");
+INSERT into theofficejob VALUES (19, "Terminated", "HR");
+INSERT into theofficejob VALUES (20, "Arrested", "QA");
+INSERT into theofficejob VALUES (21, "Retired", "Sales");
+INSERT into theofficejob VALUES (22, "Employed", "Customer Service");
+
+CREATE TABLE relationships (ID INTEGER,
+    partner_name TEXT,
+    status  TEXT,
+    children INTEGER);
+
+INSERT into relationships VALUES (1, "Jan Levinson", "Former", 0);
+INSERT into relationships VALUES (1, "Holly Partridge-Scott", "Married", 4);
+INSERT into relationships VALUES (8, "Michael Scott", "Former", 1);
+INSERT into relationships VALUES (14, "Michael Scott", "Married", 4);
+INSERT into relationships VALUES (2, "Karen Filippelli", "Former", 0);
+INSERT into relationships VALUES (7, "Jim Halpert", "Former", 0);
+INSERT into relationships VALUES (2, "Pam Beesly", "Married", 2);
+INSERT into relationships VALUES (3, "Jim Halpert", "Married", 2);
+INSERT into relationships VALUES (3, "Roy Anderson", "Former", 0);
+INSERT into relationships VALUES (9, "Pam Beesly", "Former", 0);
+INSERT into relationships VALUES (4, "Angela Martin", "Married", 1);
+INSERT into relationships VALUES (5, "Dwight Schrute", "Married", 1);
+INSERT into relationships VALUES (6, "Ryan Howard", "Together", 0);
+INSERT into relationships VALUES (10, "Kelly Kapoor", "Together", 1);
+INSERT into relationships VALUES (11, "Angela Martin", "Former", 0);
+INSERT into relationships VALUES (5, "Andy Bernard", "Former", 0);
+INSERT into relationships VALUES (11, "Erin Hannon", "Former", 0);
+INSERT into relationships VALUES (16, "Andy Bernard", "Former", 0);
+INSERT into relationships VALUES (12, "Bob Vance: Vance Refrigeration", "Married", 0);
+INSERT into relationships VALUES (13, "Phyllis Lapin-Vance", "Married", 0);    INSERT into relationships VALUES (15, "Erin Hannon", "Former", 0);
+INSERT into relationships VALUES (16, "Gabe Lewis", "Former", 0);
+INSERT into relationships VALUES (22, "Erin Hannon", "Together", 0);
+INSERT into relationships VALUES (16, "Pete Miller", "Together", 0);
+INSERT into relationships VALUES (21, "Teri Hudson", "Married", 1);
+INSERT into relationships VALUES (19,NULL,"Divorced", 1);
+
+
+/*This query uses JOIN function to show Dunder Mifflin employees, job status as of last episode, and last position held*/
+
+SELECT staff.id,staff.fullname, theofficejob.job_status, theofficejob.dept FROM staff
+    JOIN theofficejob
+    ON staff.id = theofficejob.id
+    ORDER BY staff.id ASC;
+
+/* This query uses LEFT JOIN to show relationship statuses of characters, partner names when applicable, and known number of children.*/
+
+SELECT staff.fullname, relationships.partner_name, relationships.status, relationships.children FROM staff
+    LEFT JOIN relationships
+    ON staff.id=relationships.ID;
+    
+   
