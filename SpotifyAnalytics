@@ -13,4 +13,8 @@ SELECT track_name, artist_name, danceability, energy FROM BIT_DB.Spotifydata
    ORDER BY danceability DESC
    Limit 5;
   
-  
+/*Find number of tracks each artist has on the TOP 50 list. Limit result to the 3 artists with most tracks.*/ 
+SELECT artist_name, COUNT (track_name) as tracks FROM BIT_DB.Spotifydata
+        Group by artist_name
+        Order by tracks DESC
+        LIMIT 3;
