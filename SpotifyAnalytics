@@ -1,2 +1,16 @@
 /*This project contains data and table information from a data set (spotify_top50_2021.csv) downloaded from Kaggle. Analytics on this data have bee performed using SQL.*/
+/*Query data for longest and shortest tracks in Top 50*/
+SELECT track_name, artist_name, max(duration_ms) FROM BIT_DB.Spotifydata;
+SELECT track_name, artist_name, min(duration_ms) FROM BIT_DB.Spotifydata;
 
+/*Find avg danceability of the Top 50 tracks*/
+SELECT avg(danceability) FROM BIT_DB.Spotifydata;
+
+/*Find top 5 most danceable tracks with an energy rating over .8 */
+SELECT track_name, artist_name, danceability, energy FROM BIT_DB.Spotifydata
+   WHERE danceability > .7
+   AND energy >.8
+   ORDER BY danceability DESC
+   Limit 5;
+  
+  
