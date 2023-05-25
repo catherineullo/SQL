@@ -73,3 +73,19 @@ SELECT DISTINCT location, COUNT (orderID) FROM BIT_DB.JanSales
 SELECT product, SUM(quantity) from BIT_DB.FebSales
     WHERE product LIKE '%Headphones%'
     GROUP BY product;
+
+/*What was the average amount spent per account in February?*/
+/*Option 1*/
+SELECT avg(Quantity*price) FROM BIT_DB.FebSales FebSales
+    LEFT JOIN BIT_DB.customers customers
+    ON FebSales.orderID = customers.order_id
+    WHERE length(orderID) = 6
+    AND orderID <> 'Order ID';
+
+/*Option 2*/
+SELECT SUM(quantity*price)/COUNT (customers.acctnum) FROM BIT_DB.FebSales FebSales
+    LEFT JOIN BIT_DB.customers Customers
+    ON FebSales.orderID  = Customers.order_id
+    WHERE length(orderID) = 6
+    AND orderID <> 'Order ID'; 
+
