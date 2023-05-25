@@ -89,3 +89,19 @@ SELECT SUM(quantity*price)/COUNT (customers.acctnum) FROM BIT_DB.FebSales FebSal
     WHERE length(orderID) = 6
     AND orderID <> 'Order ID'; 
 
+/*What was the average quantity of products purchased per account in February?*/
+SELECT SUM(quantity) /COUNT (customers.acctnum) FROM BIT_DB.FebSales FebSales
+    LEFT JOIN BIT_DB.customers Customers
+    ON FebSales.orderID  = Customers.order_id
+    WHERE length(orderID) = 6
+    AND orderID <> 'Order ID'; 
+    
+ /*Which product brought in the most revenue in January and how much revenue did it bring in total?*/
+ SELECT product, sum(quantity * price) AS TotalREV FROM BIT_DB.JanSales    
+    GROUP BY product
+    ORDER BY TotalREV DESC
+    LIMIT 1;
+ 
+ 
+ 
+ 
