@@ -1,0 +1,12 @@
+/*The following queries use a private database of city bike lanes to determine bike lane information and safety*/
+
+
+/*This query uses a CTE to determine the avg safety ratings of the bike lanes and to filter and identify bike lanes with a rating of 4 or higher.*/
+WITH safety_average_cte AS(
+    SELECT street, AVG(safetyrating) as 'rating'
+    FROM CityBikeLanes
+    GROUP BY street)
+
+SELECT street, rating, 'safe lane' as 'label'
+    FROM safety_average_cte
+    WHERE rating >=4;
