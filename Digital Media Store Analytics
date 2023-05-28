@@ -4,3 +4,14 @@
 SELECT CustomerID, FirstName, LastName, Country FROM chinook.customers
     WHERE Country <> 'USA'
     ORDER BY CustomerID;
+
+/*Show number of customers in each country*/
+SELECT country, COUNT(country) from chinook.customers
+    GROUP by country;
+    
+/*Show only customers in Brazil*/
+SELECT CustomerID, FirstName, LastName, Country FROM chinook.customers
+    WHERE Country = 'Brazil'
+    ORDER BY CustomerID;
+
+/**/
