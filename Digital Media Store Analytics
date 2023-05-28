@@ -14,4 +14,18 @@ SELECT CustomerID, FirstName, LastName, Country FROM chinook.customers
     WHERE Country = 'Brazil'
     ORDER BY CustomerID;
 
-/**/
+/*Show all invoices from customers in Brazil*/
+SELECT customers.CustomerID, customers.FirstName, customers.LastName, invoices.BillingCountry, 
+invoices.InvoiceId, invoices.InvoiceDate FROM chinook.customers
+    LEFT JOIN chinook.invoices
+    ON customers.CustomerID = invoices.CustomerId
+    WHERE BillingCountry = 'Brazil'
+    Order BY customers.CustomerID ASC;
+
+/*Filter for employees who are sales agents*/
+SELECT EmployeeID, FirstName, LastName, Title from chinook.employees
+    WHERE Title like  '%Sales%Agent%';
+
+/*Show number of invoices from each country used for billing*/
+SELECT BillingCountry, COUNT (BillingCountry) from chinook.invoices
+    GROUP BY BillingCountry;
