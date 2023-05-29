@@ -98,4 +98,14 @@ SELECT a.FirstName as First, a.LastName as Last, ROUND(SUM(b.Total),2) FROM chin
     JOIN chinook.customers c
     ON a.EmployeeID = c.SupportRepID
     GROUP BY c.supportrepid;
-    
+
+/*Which sales agent made the most dollars in sales in 2009?*/
+SELECT a.FirstName as First, a.LastName as Last, ROUND(SUM(b.Total),2) as TotalSales FROM chinook.employees a
+    JOIN chinook.invoices b
+    ON c.customerID = b.customerid
+    JOIN chinook.customers c
+    ON a.EmployeeID = c.SupportRepID
+    WHERE invoicedate LIKE '%2009%'
+    GROUP BY c.supportrepid
+    Order by TotalSales DESC
+    LIMIT 1;
