@@ -29,3 +29,23 @@ SELECT EmployeeID, FirstName, LastName, Title from chinook.employees
 /*Show number of invoices from each country used for billing*/
 SELECT BillingCountry, COUNT (BillingCountry) from chinook.invoices
     GROUP BY BillingCountry;
+
+/*Show invoices with the associated sales agent*/
+SELECT a.invoiceID, b.firstname AS Customer_FirstName, b.LastName AS Customer_LastName, b.SupportRepId, c.firstname, c.lastname from chinook.invoices a
+    JOIN chinook.customers b
+    ON a.customerID=b.customerID
+    JOIN chinook.employees c
+    ON b.supportrepid=c.employeeid
+    ORDER BY supportrepid ASC;
+    
+/*Display number of invoices each sales agent has*/
+SELECT COUNT (a.invoiceid), b.supportrepid, c.firstname AS Rep_FirstName, c.lastname AS Rep_LastName from chinook.invoices a
+    Join chinook.customers b
+    ON a.customerID=b.customerID
+    JOIN chinook.employees c
+    ON b.supportrepid = c.employeeid
+    GROUP BY b.supportrepid;
+    
+/**/
+
+
