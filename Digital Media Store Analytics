@@ -1,4 +1,4 @@
-/*The following queries use a private database labeled chinook containing information for a digital media store including customer, employee and content information. */
+/*The following queries use a private database labeled chinook containing information for a digital media store including customer, employee and media content information. */
 
 /*Show list of customers not located in the USA*/
 SELECT CustomerID, FirstName, LastName, Country FROM chinook.customers
