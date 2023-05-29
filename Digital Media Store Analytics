@@ -66,18 +66,36 @@ SELECT ROUND(SUM (total),2) AS TotalSales2009 from chinook.invoices
 /*Write a query that includes the purchased track name with each invoice line ID.*/
 SELECT a.InvoiceID, a.InvoiceLineID, b.Name FROM chinook.invoice_items a
     JOIN chinook.tracks b
-    ON a.TrackID = b.TrackID;
+    ON a.TrackID = b.TrackID
+    ORDER BY b.name ASC;
     
 /*Write a query that includes the purchased track name AND artist name with each invoice line ID.*/
-SELECT a.InvoiceID, a.InvoiceLineID, b.Name, d.Name FROM chinook.invoice_items a
+SELECT a.InvoiceID, a.InvoiceLineID, b.Name as TRACK, d.Name as ARTIST FROM chinook.invoice_items a
     JOIN chinook.tracks b
     ON a.TrackID = b.TrackID
     JOIN chinook.albums c
     ON b.AlbumID = c.AlbumID
     JOIN chinook.artists d
     ON c.ArtistID = d.artistID
+    ORDER BY Artist, Track ASC;
+    
+    
+/*Provide a query that shows all the Tracks, and include the Album name, Media type, and Genre.*/
+SELECT a.Name as Track, b.Title as Album, c.Name as MediaType, d.Name as Genre
+    FROM chinook.tracks a
+    JOIN chinook.albums b
+    ON a.Albumid = b.AlbumId
+    JOIN chinook.media_types c
+    ON a.mediatypeId = c.mediatypeid
+    JOIN chinook.genres d
+    ON a.genreid = d.genreid
+    Order by Album, Track ASC;
   
-    
-    
-    
+/*Show the total sales made by each sales agent.*/
+SELECT a.FirstName as First, a.LastName as Last, ROUND(SUM(b.Total),2) FROM chinook.employees a
+    JOIN chinook.invoices b
+    ON c.customerID = b.customerid
+    JOIN chinook.customers c
+    ON a.EmployeeID = c.SupportRepID
+    GROUP BY c.supportrepid;
     
